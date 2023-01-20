@@ -7,16 +7,54 @@ public class App {
     private static final int MIN_WORD_LENGTH = 3;
     private static final int MAX_WORD_LENGTH = 6;
     private static final int MIN_SCORE = 70;
-    private static final int MAX_TRIES = 10;
+    private static final int MAX_TRIES = 11;
+
+    static void wordLevel(int lvl, String worldLevel1, String worldLevel2, String worldLevel3) {
+        if (lvl == 1) {
+            System.out.println("\n\nLevel " + lvl);
+            System.out.println(worldLevel1);
+        } else if (lvl == 2) {
+            System.out.println("\n\nLevel " + lvl);
+            System.out.println(worldLevel2);
+        } else {
+            System.out.println("\n\nLevel " + lvl);
+            System.out.println(worldLevel2);
+        }
+    }
+
+    static void checkingData(int lvl, String word, int score1, int score2, int score3, int rightAnswer,
+            String[] correctAnswerLevel1, String[] correctAnswerLevel2, String[] correctAnswerLevel3) {
+        // Cek apakah data yang di input ada
+        if (lvl == 1 && Arrays.asList(correctAnswerLevel1).contains(word)) {
+            // Tambahkan skor jika jawaban benar
+            score1 += 10;
+            rightAnswer += 1;
+            System.out.println("#Right. Score : " + score1);
+        } else if (lvl == 2 && Arrays.asList(correctAnswerLevel2).contains(word)) {
+            // Tambahkan skor jika jawaban benar
+            score2 += 10;
+            rightAnswer += 1;
+            System.out.println("#Right. Score : " + score2);
+        } else if (lvl == 3 && Arrays.asList(correctAnswerLevel3).contains(word)) {
+            // Tambahkan skor jika jawaban benar
+            score3 += 10;
+            rightAnswer += 1;
+            System.out.println("#Right. Score : " + score3);
+        } else {
+            score1 += 0;
+            score2 += 0;
+            score3 += 0;
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
         // Store word that already used with HashSet<>()
         HashSet<String> usedWords = new HashSet<>();
-        String Wordlevel1 = "d  e  t  t  l  i";
-        String Wordlevel2 = "a  e  c  a  e  n";
-        String Wordlevel3 = "h  k  r  n  e  o";
+        String wordLevel1 = "d  e  t  t  l  i";
+        String wordLevel2 = "a  e  c  a  e  n";
+        String wordLevel3 = "h  k  r  n  e  o";
         String[] array = {
                 "Coepoe Word Puzzle",
                 "=================== \n",
@@ -34,30 +72,25 @@ public class App {
         String[] correctAnswerLevel3 = { "honk", "honker", "roe", "ore", "her", "hen", "one", "cas", "ease", "acena",
                 "caean" };
 
-        
-        // String answer = "ted";
-
-        // if (Arrays.asList(correctAnswerLevel1).contains(answer)) {
-        //     System.out.println("The word is valid.");
-        // } else {
-        //     System.out.println("The word is not valid.");
-        // }
-
         for (String teks : array) {
             System.out.println(teks);
         }
 
         // Level 1
         int lvl = 1;
-        int score = 0;
-        while (lvl <= 3) {
-            System.out.println("\nLevel " + lvl);
-            System.out.println("You have " + MAX_TRIES + " tries to reach a score of " + MIN_SCORE);
+        int score1 = 0;
+        int score2 = 0;
+        int score3 = 0;
 
-            int tries = 0;
+        while (lvl <= 3) {
+
+            wordLevel(lvl, wordLevel1, wordLevel2, wordLevel3);
+
+            int tries = 1;
+            int rightAnswer = 0;
             while (tries < MAX_TRIES) {
 
-                System.out.print("Enter a word: ");
+                System.out.print(tries + "> Your Answer: ");
                 String word = input.nextLine();
 
                 if (word.length() < MIN_WORD_LENGTH || word.length() > MAX_WORD_LENGTH) {
@@ -66,27 +99,45 @@ public class App {
                     continue;
                 }
                 if (usedWords.contains(word)) {
-                    System.out.println("Invalid input. You've already used that word.");
+                    System.out.println("You had already type this word before..");
                     continue;
                 }
                 // Tambahkan kata yang digunakan ke HashSet
                 usedWords.add(word);
 
-                // Tambahkan skor jika jawaban benar
-                score += 10;
-                System.out.println("Correct! Your current score is " + score);
+                checkingData(lvl, word, score1, score2, score3, rightAnswer, correctAnswerLevel1, correctAnswerLevel2,
+                        correctAnswerLevel3);
 
                 // Cek apakah skor sudah mencukupi untuk melanjutkan ke level berikutnya
-                if (score >= MIN_SCORE) {
-                    System.out.println(
-                            "Congratulations! You've reached the required score to move on to the next level.");
+                if (lvl == 1 && score1 >= MIN_SCORE || lvl == 2 && score2 >= MIN_SCORE || lvl == 3
+                        && score3 >= MIN_SCORE) {
+                    System.out.println("You had answered 10 With " + rightAnswer + " right answers..");
+
+                    System.out.println("\nCorrect Answers :");
+                    if (lvl == 1) {
+                        for (String element : correctAnswerLevel1) {
+                            System.out.print(element + " ");
+                        }
+                    } else if (lvl == 2) {
+                        for (String element : correctAnswerLevel2) {
+                            System.out.print(element + " ");
+                        }
+                    } else {
+                        for (String element : correctAnswerLevel2) {
+                            System.out.print(element + " ");
+                        }
+
+                    }
+
                     lvl++;
                     break;
                 }
+
                 tries++;
             }
 
-            if (tries == MAX_TRIES && score < MIN_SCORE) {
+            if (tries == MAX_TRIES && score1 < MIN_SCORE || tries == MAX_TRIES && score2 < MIN_SCORE
+                    || tries == MAX_TRIES && score3 < MIN_SCORE) {
                 System.out.print("You did not reach the required score. Do you want to try again? (Y/N): ");
                 String choice = input.nextLine();
 
@@ -94,19 +145,16 @@ public class App {
                     usedWords.clear();
                     continue;
                 } else if (choice.equalsIgnoreCase("N")) {
-                    System.out.println("Game Over. Your final score is: " + score);
+                    System.out.println("Game Over. Your final score is: " + score1);
                     return;
                 } else {
                     System.out.println("Invalid input. Exiting game.");
                     return;
                 }
             }
-            // Jika user berhasil melewati level 3 dengan skor minimal 70, tampilkan nilai
-            // akhir yang diakumulasi dari level 1
-            System.out.println("Congratulations! You've completed all levels. Your final score is: " + score);
-            input.close();
 
         }
+        input.close();
 
     }
 }
