@@ -14,6 +14,9 @@ public class App {
 
         // Store word that already used with HashSet<>()
         HashSet<String> usedWords = new HashSet<>();
+        String Wordlevel1 = "d  e  t  t  l  i";
+        String Wordlevel2 = "a  e  c  a  e  n";
+        String Wordlevel3 = "h  k  r  n  e  o";
         String[] array = {
                 "Coepoe Word Puzzle",
                 "=================== \n",
@@ -22,15 +25,23 @@ public class App {
                 "2. Each level, You have 10 chances to answer correctly.",
                 "3. To get through to next level, you have to score 70 points each level"
         };
-        String[] correctAnswer = { "die", "led", "lei", "let", "lied", "lie", "lit", "tie", "deli", "diet",
+        String[] correctAnswerLevel1 = { "die", "led", "lei", "let", "lied", "lie", "lit", "tie", "deli", "diet",
                 "edit", "idle", "lied", "tide", "tied", "tile", "tilt", "tilde", "tiled", "title", "tilted", "titled" };
-        String answer = "ted";
 
-        if (Arrays.asList(correctAnswer).contains(answer)) {
-            System.out.println("The word is valid.");
-        } else {
-            System.out.println("The word is not valid.");
-        }
+        String[] correctAnswerLevel2 = { "sec", "can", "cane", "scan", "scene", "case", "cease", "cas", "ease", "acena",
+                "caean" };
+
+        String[] correctAnswerLevel3 = { "honk", "honker", "roe", "ore", "her", "hen", "one", "cas", "ease", "acena",
+                "caean" };
+
+        
+        // String answer = "ted";
+
+        // if (Arrays.asList(correctAnswerLevel1).contains(answer)) {
+        //     System.out.println("The word is valid.");
+        // } else {
+        //     System.out.println("The word is not valid.");
+        // }
 
         for (String teks : array) {
             System.out.println(teks);
