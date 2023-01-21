@@ -6,8 +6,9 @@ public class App {
     // Global variabel
     private static final int MIN_WORD_LENGTH = 3;
     private static final int MAX_WORD_LENGTH = 6;
-    private static final int MIN_SCORE = 20;
-    private static final int MAX_TRIES = 4;
+    private static final int MIN_SCORE = 70;
+    private static final int MAX_TRIES = 11;
+    private static final int MAX_TRIES1 = 10;
 
     static void wordLevel(int lvl, String worldLevel1, String worldLevel2, String worldLevel3) {
         if (lvl == 1) {
@@ -104,22 +105,29 @@ public class App {
                 }
 
                 // Cek apakah skor sudah mencukupi untuk melanjutkan ke level berikutnya
-                if (lvl == 1 && score1 >= MIN_SCORE || lvl == 2 && score2 >= MIN_SCORE || lvl == 3
-                        && score3 >= MIN_SCORE) {
+                if (lvl == 1 && tries == MAX_TRIES1 && score1 >= MIN_SCORE
+                        || lvl == 2 && tries == MAX_TRIES1 && score2 >= MIN_SCORE || lvl == 3 && tries == MAX_TRIES1
+                                && score3 >= MIN_SCORE) {
+                    System.out.println(tries);
                     System.out.println("You had answered 10 With " + rightAnswer + " right answers..");
 
                     System.out.println("\nCorrect Answers :");
                     if (lvl == 1) {
                         for (String element : correctAnswerLevel1) {
                             System.out.print(element + " ");
+                            usedWords.clear();
                         }
                     } else if (lvl == 2) {
                         for (String element : correctAnswerLevel2) {
                             System.out.print(element + " ");
+                            usedWords.clear();
+
                         }
                     } else {
                         for (String element : correctAnswerLevel2) {
                             System.out.print(element + " ");
+                            usedWords.clear();
+
                         }
 
                     }
