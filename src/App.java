@@ -137,6 +137,9 @@ public class App {
 
                 if (choice.equalsIgnoreCase("Y")) {
                     usedWords.clear();
+                    score1 = 0;
+                    score2 = 0;
+                    score3 = 0;
                     continue;
                 } else if (choice.equalsIgnoreCase("N")) {
                     System.out.println("Game Over. Your final score is: " + score1);
