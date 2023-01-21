@@ -6,8 +6,8 @@ public class App {
     // Global variabel
     private static final int MIN_WORD_LENGTH = 3;
     private static final int MAX_WORD_LENGTH = 6;
-    private static final int MIN_SCORE = 70;
-    private static final int MAX_TRIES = 11;
+    private static final int MIN_SCORE = 20;
+    private static final int MAX_TRIES = 4;
 
     static void wordLevel(int lvl, String worldLevel1, String worldLevel2, String worldLevel3) {
         if (lvl == 1) {
@@ -19,31 +19,6 @@ public class App {
         } else {
             System.out.println("\n\nLevel " + lvl);
             System.out.println(worldLevel2);
-        }
-    }
-
-    static void checkingData(int lvl, String word, int score1, int score2, int score3, int rightAnswer,
-            String[] correctAnswerLevel1, String[] correctAnswerLevel2, String[] correctAnswerLevel3) {
-        // Cek apakah data yang di input ada
-        if (lvl == 1 && Arrays.asList(correctAnswerLevel1).contains(word)) {
-            // Tambahkan skor jika jawaban benar
-            score1 += 10;
-            rightAnswer += 1;
-            System.out.println("#Right. Score : " + score1);
-        } else if (lvl == 2 && Arrays.asList(correctAnswerLevel2).contains(word)) {
-            // Tambahkan skor jika jawaban benar
-            score2 += 10;
-            rightAnswer += 1;
-            System.out.println("#Right. Score : " + score2);
-        } else if (lvl == 3 && Arrays.asList(correctAnswerLevel3).contains(word)) {
-            // Tambahkan skor jika jawaban benar
-            score3 += 10;
-            rightAnswer += 1;
-            System.out.println("#Right. Score : " + score3);
-        } else {
-            score1 += 0;
-            score2 += 0;
-            score3 += 0;
         }
     }
 
@@ -105,8 +80,27 @@ public class App {
                 // Tambahkan kata yang digunakan ke HashSet
                 usedWords.add(word);
 
-                checkingData(lvl, word, score1, score2, score3, rightAnswer, correctAnswerLevel1, correctAnswerLevel2,
-                        correctAnswerLevel3);
+                // Cek apakah data yang di input ada
+                if (lvl == 1 && Arrays.asList(correctAnswerLevel1).contains(word)) {
+                    // Tambahkan skor jika jawaban benar
+                    score1 += 10;
+                    rightAnswer += 1;
+                    System.out.println("#Right. Score : " + score1);
+                } else if (lvl == 2 && Arrays.asList(correctAnswerLevel2).contains(word)) {
+                    // Tambahkan skor jika jawaban benar
+                    score2 += 10;
+                    rightAnswer += 1;
+                    System.out.println("#Right. Score : " + score2);
+                } else if (lvl == 3 && Arrays.asList(correctAnswerLevel3).contains(word)) {
+                    // Tambahkan skor jika jawaban benar
+                    score3 += 10;
+                    rightAnswer += 1;
+                    System.out.println("#Right. Score : " + score3);
+                } else {
+                    score1 += 0;
+                    score2 += 0;
+                    score3 += 0;
+                }
 
                 // Cek apakah skor sudah mencukupi untuk melanjutkan ke level berikutnya
                 if (lvl == 1 && score1 >= MIN_SCORE || lvl == 2 && score2 >= MIN_SCORE || lvl == 3
