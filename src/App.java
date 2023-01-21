@@ -18,12 +18,13 @@ public class App {
             System.out.println(worldLevel2);
         } else {
             System.out.println("\n\nLevel " + lvl);
-            System.out.println(worldLevel2);
+            System.out.println(worldLevel3);
         }
     }
 
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
+        int overalScore = 0;
 
         // Store word that already used with HashSet<>()
         HashSet<String> usedWords = new HashSet<>();
@@ -129,12 +130,12 @@ public class App {
 
                 tries++;
             }
-            int overalScore = score1 + score2 + score3;
-
+            overalScore = score1 + score2 + score3;
 
             if (tries == MAX_TRIES && score1 < MIN_SCORE || tries == MAX_TRIES && score2 < MIN_SCORE
                     || tries == MAX_TRIES && score3 < MIN_SCORE) {
-                System.out.print("You did not reach the required score. Do you want to try again? (Y/N): ");
+                System.out.println("You lose !! Try Again..");
+                System.out.println("Do you want to try again? (Y/T): ");
                 String choice = input.nextLine();
 
                 if (choice.equalsIgnoreCase("Y")) {
@@ -143,7 +144,7 @@ public class App {
                     score2 = 0;
                     score3 = 0;
                     continue;
-                } else if (choice.equalsIgnoreCase("N")) {
+                } else if (choice.equalsIgnoreCase("T")) {
                     System.out.println("Game Over. Your final score is: " + overalScore);
                     return;
                 } else {
@@ -153,6 +154,12 @@ public class App {
             }
 
         }
+        System.out.println("\n\nOverall score : " + overalScore);
+        System.out.println("You Win!!");
+        System.out.println("Press enter to exit");
+        input.nextLine();
+        System.exit(0);
+
         input.close();
 
     }
