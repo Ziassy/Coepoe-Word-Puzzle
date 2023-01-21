@@ -129,6 +129,8 @@ public class App {
 
                 tries++;
             }
+            int overalScore = score1 + score2 + score3;
+
 
             if (tries == MAX_TRIES && score1 < MIN_SCORE || tries == MAX_TRIES && score2 < MIN_SCORE
                     || tries == MAX_TRIES && score3 < MIN_SCORE) {
@@ -142,7 +144,7 @@ public class App {
                     score3 = 0;
                     continue;
                 } else if (choice.equalsIgnoreCase("N")) {
-                    System.out.println("Game Over. Your final score is: " + score1);
+                    System.out.println("Game Over. Your final score is: " + overalScore);
                     return;
                 } else {
                     System.out.println("Invalid input. Exiting game.");
